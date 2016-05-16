@@ -1,0 +1,10 @@
+extends ../plantillas/plantilla-principal
+
+block title
+    -var proyecto = {nombre: 'nombre', seccion: 'seccion'}
+    title #{proyecto.nombre} | #{proyecto.seccion}
+
+block description
+    meta(name='description', content='Descripción de la página')
+block content
+    main
