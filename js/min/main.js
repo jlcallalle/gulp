@@ -1,0 +1,1 @@
+var MyApp,MyApp={seccion:{modulo:function(){}}};$(document).ready(function(){$(".clase").length&&MyApp.seccion.modulo(),console.log("hola2")});
