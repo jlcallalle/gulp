@@ -1,0 +1,19 @@
+// Librerias sass
+
+// Dependecias del proyecto
+@import 'variables';
+@import 'ayudas';
+@import 'fuentes';
+
+// Dependecias JS
+
+// Patrones
+@import 'generales';
+
+// Secciones
+
+.main {
+	.test {
+		background:purple;
+	}
+}

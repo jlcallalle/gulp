@@ -7,7 +7,8 @@ var gulp = require('gulp'),
   uglify = require('gulp-uglify'),
   jade = require('gulp-jade'),
   imagemin = require('gulp-imagemin'),
-  minifyCSS = require('gulp-minify-css');
+  minifyCSS = require('gulp-minify-css'),
+  sass = require('gulp-sass');
 
 
 //gulp.task('estaticos', ['imagenes', 'css', 'js']);
@@ -45,4 +46,17 @@ gulp.task('mincss', function() {
         .pipe(gulp.dest('./dist/css/'))
 });
 
+//sass
 
+gulp.task('styles', function() {
+    gulp.src('scss/main.scss')
+        .pipe(sass().on('error', sass.logError))
+        .pipe(gulp.dest('./css/'));
+});
+
+//watch
+
+gulp.task('watch', function(){
+  gulp.watch('scss/*.scss', ['styles']); 
+  // Other watchers
+})
