@@ -8,10 +8,9 @@ var gulp = require('gulp'),
   jade = require('gulp-jade'),
   imagemin = require('gulp-imagemin'),
   minifyCSS = require('gulp-minify-css'),
-  sass = require('gulp-sass');
+  sass = require('gulp-sass'),
+  browserSync = require('browser-sync').create();
 
-
-//gulp.task('estaticos', ['imagenes', 'css', 'js']);
 
 //concatenar y minificar archivos .js
 gulp.task('demo', function () {
@@ -48,15 +47,44 @@ gulp.task('mincss', function() {
 
 //sass
 
-gulp.task('styles', function() {
+gulp.task('sass', function() {
     gulp.src('scss/main.scss')
         .pipe(sass().on('error', sass.logError))
-        .pipe(gulp.dest('./css/'));
+        .pipe(gulp.dest('./css/'))
+        .pipe(browserSync.reload({
+	      stream: true
+	    }))
 });
 
-//watch
 
-gulp.task('watch', function(){
-  gulp.watch('scss/*.scss', ['styles']); 
+
+//browser-sync
+gulp.task('browserSync', function() {
+  browserSync.init({
+    server: {
+      baseDir: ''
+    },
+  })
+})
+
+
+//watch
+gulp.task('watch', ['browserSync', 'jade'], function (){
+	gulp.watch('scss/*.scss', ['sass']); 
+	gulp.watch('jade/vistas/*.jade',['jade']);
   // Other watchers
 })
+
+
+
+//gulp.task('estaticos', ['imagenes', 'css', 'js']);
+
+
+
+
+
+
+
+
+
+
