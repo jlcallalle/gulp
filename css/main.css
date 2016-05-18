@@ -32,6 +32,6 @@ main {
   main h1 {
     font-size: 45px;
     font-weight: bold;
-    color: red; }
+    color: orange; }
   main .test {
     background: rgba(255, 255, 255, 0.5); }
