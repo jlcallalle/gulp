@@ -53,11 +53,24 @@ gulp.task('mincss', function() {
 });
 
 
-//contact & minifyjs
+//concat js
+gulp.task('concatjs', function() {
+  return gulp.src('./componentes/*.js')
+    .pipe(concat('recursos.js'))
+    .pipe(gulp.dest('./js/'));
+});
+
+//minifyjs
 gulp.task('minjs', function () {
-  gulp.src('js/*.js')
-  //.pipe(concat('main.js'))
-  .pipe(uglify())
+  gulp.src('js/main.js')
+  .pipe(gulp.dest('js/min/'))
+});
+
+
+
+//minifyjs recursos
+gulp.task('minjs2', function () {
+  gulp.src('js/recursos.js')
   .pipe(gulp.dest('js/min/'))
 });
 
@@ -81,7 +94,6 @@ gulp.task('watch', ['browserSync', 'jade', 'minjs', 'mincss'], function (){
   gulp.watch('js/*.js', ['minjs']); 
 	//gulp.watch('css/*.css',['mincss']);
 })
-
 
 
 //see later: gulp-sourcemaps , gulp-cache , imagemin-pngquant 

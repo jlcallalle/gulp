@@ -32,5 +32,5 @@ $(document).ready(function(){
     if($('.clase').length){
         MyApp.seccion.modulo();
     }
-    console.log('hola2');
+    console.log('hola1234');
 });
