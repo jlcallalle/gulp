@@ -44,14 +44,16 @@ gulp.task('imagemin', function () {
     .pipe(gulp.dest('images/min'));
 });
 
-//minificar archivos css con clean-css.
+
+//minify css (alternative)
 gulp.task('mincss', function() {
     gulp.src('./css/*.css')
         .pipe(minifyCSS())
         .pipe(gulp.dest('./css/min/'))
 });
 
-//concatenar y minificar archivos .js
+
+//contact & minifyjs
 gulp.task('minjs', function () {
   gulp.src('js/*.js')
   //.pipe(concat('main.js'))
@@ -72,19 +74,17 @@ gulp.task('browserSync', function() {
 
 //watch
 gulp.task('watch', ['browserSync', 'jade', 'minjs', 'mincss'], function (){
-	//gulp src (origgen)
+  //gulp src (origgen)
   gulp.watch('scss/*.scss', ['sass']); 
-	gulp.watch('jade/vistas/*.jade',['jade']);
+  gulp.watch('jade/vistas/*.jade',['jade']);
 
-  //gulp destinos
   gulp.watch('js/*.js', ['minjs']); 
-	gulp.watch('css/*.css',['mincss']);
-  // Other watchers
+	//gulp.watch('css/*.css',['mincss']);
 })
 
 
 
-//see later: gulp-sourcemaps 
+//see later: gulp-sourcemaps , gulp-cache , imagemin-pngquant 
 
 
 
