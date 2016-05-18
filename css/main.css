@@ -25,13 +25,13 @@ p {
   color: green; }
 
 .hola {
-  color: blue; }
+  color: red; }
 
 main {
   background: rgba(255, 255, 255, 0.5); }
   main h1 {
     font-size: 45px;
     font-weight: bold;
-    color: orange; }
+    color: red; }
   main .test {
     background: rgba(255, 255, 255, 0.5); }
