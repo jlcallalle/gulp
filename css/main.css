@@ -30,7 +30,7 @@ p {
 main {
   background: rgba(255, 255, 255, 0.5); }
   main h1 {
-    font-size: 45px;
+    font-size: 25px;
     font-weight: bold;
     color: red; }
   main .test {

@@ -26,7 +26,8 @@ gulp.task('jade', function() {
 
 gulp.task('sass', function() {
   gulp.src('scss/main.scss')
-      .pipe(sass().on('error', sass.logError))
+      //output styles : nested, expanded, compact, compressed 
+      .pipe(sass({ outputStyle: 'nested' }).on('error', sass.logError))
       .pipe(gulp.dest('./css/'))
       .pipe(browserSync.reload({
         stream: true //reload browser css
