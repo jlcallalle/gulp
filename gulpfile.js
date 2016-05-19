@@ -72,7 +72,6 @@ gulp.task('jmin-main', function() {
 });
 
 
-//browser-sync
 gulp.task('browserSync', function() {
   browserSync.init({
     server: {
@@ -82,10 +81,10 @@ gulp.task('browserSync', function() {
 })
 
 
-//watch
+//compile sass + jade
 gulp.task('watch', ['browserSync', 'sass' , 'jade'], function (){
   gulp.watch('scss/*.scss', ['sass']); 
   gulp.watch('jade/vistas/*.jade',['jade']);
 })
 
-//https://www.browsersync.io/docs/gulp/
+
