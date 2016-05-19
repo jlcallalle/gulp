@@ -11,8 +11,8 @@ var gulp = require('gulp'),
   sass = require('gulp-sass'),
   jade = require('gulp-jade'),
   minify = require('gulp-minify'),
-  //gutil = require('gulp-util'),
-  //UglifyJS = require("uglify-js"),
+  gutil = require('gulp-util'),
+  UglifyJS = require("uglify-js"),
   browserSync = require('browser-sync').create();
 
 
@@ -76,18 +76,16 @@ gulp.task('jmin-main', function() {
 gulp.task('browserSync', function() {
   browserSync.init({
     server: {
-      baseDir: ''
+      baseDir: './'
     },
   })
 })
 
 
 //watch
-gulp.task('watch', ['browserSync', 'jade', 'minjs', 'mincss'], function (){
-  //gulp src (origgen)
+gulp.task('watch', ['browserSync', 'sass' , 'jade'], function (){
   gulp.watch('scss/*.scss', ['sass']); 
   gulp.watch('jade/vistas/*.jade',['jade']);
-  gulp.watch('js/*.js', ['minjs']); 
-	//gulp.watch('css/*.css',['mincss']);
 })
 
+//https://www.browsersync.io/docs/gulp/
