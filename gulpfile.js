@@ -6,15 +6,15 @@ var gulp = require('gulp'),
   concat = require('gulp-concat'),
   rename = require('gulp-rename'),  
   uglify = require('gulp-uglify'),
-  jade = require('gulp-jade'),
-  imagemin = require('gulp-imagemin'),
   minifyCSS = require('gulp-minify-css'),
+  imagemin = require('gulp-imagemin'),
   sass = require('gulp-sass'),
+  jade = require('gulp-jade'),
+  minify = require('gulp-minify'),
+  //gutil = require('gulp-util'),
+  //UglifyJS = require("uglify-js"),
   browserSync = require('browser-sync').create();
-  
-var minify = require('gulp-minify');
-var gutil = require('gulp-util');
-var UglifyJS = require("uglify-js");
+
 
 gulp.task('jade', function() {
   gulp.src('jade/vistas/*.jade')
@@ -37,7 +37,7 @@ gulp.task('sass', function() {
   }))
 });
 
-//Minify PNG, JPEG, GIF and SVG images
+//minify png, jpeg, gif and svg images
 gulp.task('imagemin', function () {
     return gulp.src(['images/*.*'])
     .pipe(imagemin({ 
@@ -46,33 +46,25 @@ gulp.task('imagemin', function () {
     .pipe(gulp.dest('images/min'));
 });
 
-//minify css (alternative)
-gulp.task('mincss', function() {
-    gulp.src('./css/*.css')
-      .pipe(minifyCSS())
-      .pipe(gulp.dest('./css/min/'))
-});
 
-// Concat & Minify JS recursos
-
+//concat & minify recursos.min.js
 var jsFiles = ['componentes/jquery/dist/jquery.js', 
                 'componentes/jquery-validation/dist/jquery.validate.js' 
               ] 
     jsDest = 'js';
 
-gulp.task('scripts-recursos', function() {  
+gulp.task('jmin-recursos', function() {  
     return gulp.src(jsFiles)
         .pipe(concat('recursos.js'))
-        .pipe(gulp.dest(jsDest))
+        .pipe(gulp.dest('jsDest'))
         .pipe(rename('recursos.min.js'))
         .pipe(uglify())
         .pipe(gulp.dest('js/min'));
 });
 
-//Minify JS main.js
-gulp.task('scripts-main', function() {  
+//minify main.min.js
+gulp.task('jmin-main', function() {  
     return gulp.src('js/main.js')
-        .pipe(concat('main.js'))
         .pipe(gulp.dest('js'))
         .pipe(rename('main.min.js'))
         .pipe(uglify())
@@ -95,11 +87,7 @@ gulp.task('watch', ['browserSync', 'jade', 'minjs', 'mincss'], function (){
   //gulp src (origgen)
   gulp.watch('scss/*.scss', ['sass']); 
   gulp.watch('jade/vistas/*.jade',['jade']);
-
   gulp.watch('js/*.js', ['minjs']); 
 	//gulp.watch('css/*.css',['mincss']);
 })
 
-
-//see later: gulp-sourcemaps , gulp-cache , imagemin-pngquant 
-//http://codehangar.io/concatenate-and-minify-javascript-with-gulp/
