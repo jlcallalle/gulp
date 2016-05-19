@@ -4,13 +4,16 @@
 
 var gulp = require('gulp'),
   concat = require('gulp-concat'),
+  rename = require('gulp-rename'),  
   uglify = require('gulp-uglify'),
   jade = require('gulp-jade'),
   imagemin = require('gulp-imagemin'),
   minifyCSS = require('gulp-minify-css'),
   sass = require('gulp-sass'),
   browserSync = require('browser-sync').create();
-
+  
+var gutil = require('gulp-util');
+var UglifyJS = require("uglify-js");
 
 gulp.task('jade', function() {
   gulp.src('jade/vistas/*.jade')
@@ -46,19 +49,34 @@ gulp.task('imagemin', function () {
 
 
 //minify css (alternative)
+/*
 gulp.task('mincss', function() {
     gulp.src('./css/*.css')
         .pipe(minifyCSS())
         .pipe(gulp.dest('./css/min/'))
 });
+*/
+
+// Concat & Minify JS
+//script paths
+var jsFiles = 'componentes/*.js',  
+    jsDest = 'js';
 
 
-//concat js
-gulp.task('concatjs', function() {
-  return gulp.src('./componentes/*.js')
-    .pipe(concat('recursos.js'))
-    .pipe(gulp.dest('./js/'));
+gulp.task('scripts', function() {  
+    return gulp.src(jsFiles)
+        .pipe(concat('scripts.js'))
+        .pipe(gulp.dest(jsDest))
+        .pipe(rename('scripts.min.js'))
+        .pipe(uglify())
+        .pipe(gulp.dest(jsDest));
 });
+
+ gulp.task('jsmin', function() {
+      return gulp.src('js/recursos.js')
+        .pipe(uglify('recursos.min.js'))
+        .pipe( gulp.dest('js/scripts/'));
+    });
 
 //minifyjs
 gulp.task('minjs', function () {
@@ -67,12 +85,6 @@ gulp.task('minjs', function () {
 });
 
 
-
-//minifyjs recursos
-gulp.task('minjs2', function () {
-  gulp.src('js/recursos.js')
-  .pipe(gulp.dest('js/min/'))
-});
 
 
 //browser-sync
@@ -101,4 +113,4 @@ gulp.task('watch', ['browserSync', 'jade', 'minjs', 'mincss'], function (){
 
 
 
-
+//http://codehangar.io/concatenate-and-minify-javascript-with-gulp/
