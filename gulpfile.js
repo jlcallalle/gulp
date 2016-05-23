@@ -6,15 +6,10 @@ var gulp = require('gulp'),
   concat = require('gulp-concat'),
   rename = require('gulp-rename'),  
   uglify = require('gulp-uglify'),
-  minifyCSS = require('gulp-minify-css'),
   imagemin = require('gulp-imagemin'),
   sass = require('gulp-sass'),
   jade = require('gulp-jade'),
-  minify = require('gulp-minify'),
-  gutil = require('gulp-util'),
-  UglifyJS = require("uglify-js"),
   browserSync = require('browser-sync').create();
-
 
 gulp.task('jade', function() {
   gulp.src('jade/vistas/*.jade')
@@ -46,7 +41,6 @@ gulp.task('imagemin', function () {
     .pipe(gulp.dest('images/min'));
 });
 
-
 //concat & minify recursos.min.js
 var jsFiles = ['componentes/jquery/dist/jquery.js', 
                 'componentes/jquery-validation/dist/jquery.validate.js' 
@@ -71,7 +65,6 @@ gulp.task('jmin-main', function() {
         .pipe(gulp.dest('js/min'));
 });
 
-
 gulp.task('browserSync', function() {
   browserSync.init({
     server: {
@@ -80,11 +73,10 @@ gulp.task('browserSync', function() {
   })
 })
 
-
 //compile sass + jade
 gulp.task('watch', ['browserSync', 'sass' , 'jade'], function (){
   gulp.watch('scss/*.scss', ['sass']); 
-  gulp.watch('jade/vistas/*.jade',['jade']);
+  gulp.watch('jade/**/*.jade',['jade']);
 })
 
 
