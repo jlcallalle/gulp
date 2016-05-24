@@ -10,6 +10,7 @@ var gulp = require('gulp'),
   sass = require('gulp-sass'),
   jade = require('gulp-jade'),
   autoprefixer = require('gulp-autoprefixer'),
+  sourcemaps = require('gulp-sourcemaps'),
   browserSync = require('browser-sync').create();
 
 gulp.task('autoprefixer', () =>
