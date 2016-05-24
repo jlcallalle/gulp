@@ -18,7 +18,7 @@ gulp.task('autoprefixer', () =>
             browsers: ['last 6 versions'],
             cascade: true
         }))
-        .pipe(gulp.dest('prefix'))
+        .pipe(gulp.dest('css/prefix'))
 );
 
 gulp.task('jade', function() {
