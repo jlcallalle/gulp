@@ -13,14 +13,6 @@ var gulp = require('gulp'),
   sourcemaps = require('gulp-sourcemaps'),
   browserSync = require('browser-sync').create();
 
-gulp.task('autoprefixer', () =>
-    gulp.src('css/main.css')
-        .pipe(autoprefixer({
-            browsers: ['last 6 versions'],
-            cascade: true
-        }))
-        .pipe(gulp.dest('css/prefix'))
-);
 
 gulp.task('jade', function() {
   gulp.src('jade/vistas/*.jade')
@@ -83,6 +75,20 @@ gulp.task('browserSync', function() {
     },
   })
 })
+
+
+// autoprefixer & sourcemaps
+gulp.task('autoprefixer', function () {
+	return gulp.src('css/*.css')
+		.pipe(sourcemaps.init())
+		.pipe(autoprefixer({
+            browsers: ['last 6 versions', 'IE 8', 'IE 9', 'IE 10'],
+            cascade: true
+        }))
+		.pipe(concat('main.css'))
+		.pipe(sourcemaps.write('.'))
+		.pipe(gulp.dest('css/prefix'));
+});
 
 //compile sass + jade
 gulp.task('watch', ['browserSync', 'sass' , 'jade'], function (){
