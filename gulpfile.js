@@ -9,7 +9,17 @@ var gulp = require('gulp'),
   imagemin = require('gulp-imagemin'),
   sass = require('gulp-sass'),
   jade = require('gulp-jade'),
+  autoprefixer = require('gulp-autoprefixer'),
   browserSync = require('browser-sync').create();
+
+gulp.task('autoprefixer', () =>
+    gulp.src('css/main.css')
+        .pipe(autoprefixer({
+            browsers: ['last 6 versions'],
+            cascade: true
+        }))
+        .pipe(gulp.dest('prefix'))
+);
 
 gulp.task('jade', function() {
   gulp.src('jade/vistas/*.jade')
